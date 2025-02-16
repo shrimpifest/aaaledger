@@ -14,7 +14,7 @@ struct AddLedgerSheet: View {
     @State private var currency: Currency = .cny
     @State private var ledgerMode: LedgerMode = .timeline
     var body: some View {
-        VStack {
+        VStack(spacing: 10) {
             HStack {
                 Button("Cancel") {
                     isPresented = false
@@ -29,8 +29,16 @@ struct AddLedgerSheet: View {
 
             TextField("Ledger Name", text: $ledgerName)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-            CurrencySelector(selected: $currency)
-            LedgerModeSelector(selected: $ledgerMode)
+            HStack {
+                Text("Currency")
+                CurrencySelector(selected: $currency)
+            }
+            .zIndex(100)
+            HStack {
+                Text("Display Mode")
+                LedgerModeSelector(selected: $ledgerMode)
+            }
+            .zIndex(99)
             Spacer()
         }
         .frame(maxWidth: .infinity)

@@ -35,13 +35,13 @@ enum Currency: String, CaseIterable {
         case .gbp:
             return "£"
         case .aud:
-            return "A$"
+            return "$"
         case .cad:
-            return "C$"
+            return "$"
         case .chf:
             return "CHF"
         case .hkd:
-            return "HK$"
+            return "$"
         case .inr:
             return "₹"
         case .jpy:
@@ -49,7 +49,7 @@ enum Currency: String, CaseIterable {
         case .rub:
             return "₽"
         case .sgd:
-            return "S$"
+            return "$"
         case .thb:
             return "฿"
         case .twd:
