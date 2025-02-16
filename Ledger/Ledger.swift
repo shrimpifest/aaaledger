@@ -36,7 +36,7 @@ class Ledger: Identifiable {
 }
 
 extension Ledger {
-    static let sampleLedger: [Ledger] = [
+    static let sampleLedgers: [Ledger] = [
         Ledger(
             title: "Ledger 1", current: .cny, currencySymbol: "¥", logs: [], totalAmount: 1000,
             mode: LedgerMode.timeline.rawValue),

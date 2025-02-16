@@ -46,9 +46,9 @@ struct ContentView: View {
 struct RootRoutes: View {
     var body: some View {
         SwitchRoutes {
-            Route("ledger", content: LedgerTabRoutes())
-            Route("analysis", content: AnalysisTabRoutes())
-            Route("setting", content: SettingTabRoutes())
+            Route("/ledger/*", content: LedgerTabRoutes())
+            Route("/analysis/*", content: AnalysisTabRoutes())
+            Route("/setting/*", content: SettingTabRoutes())
         }
     }
 }

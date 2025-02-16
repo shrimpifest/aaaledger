@@ -8,14 +8,16 @@ import SwiftUIRouter
 struct LedgerTabRoutes: View {
     var body: some View {
         SwitchRoutes {
-            Route(
-                content: LedgerTabView()
-            )
+            Route(":id") { info in
+                LedgerDetailView(ledgerId: info.parameters["id"]!)
+            }
+            Route(content: LedgerTabView())
         }
     }
 }
 
 struct LedgerTabView: View {
+    @EnvironmentObject private var navigator: Navigator
     @State private var showAddLedger: Bool = false
     @State private var ledgerList: [Ledger] = []
 
@@ -62,7 +64,7 @@ struct LedgerTabView: View {
                 .closeOnTap(false)
         }
         .onAppear {
-            self.ledgerList = Ledger.sampleLedger
+            self.ledgerList = Ledger.sampleLedgers
         }
     }
 
@@ -78,6 +80,9 @@ struct LedgerTabView: View {
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color.gray.opacity(0.1))
                 .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 0)
+        }
+        .onTapGesture {
+            navigator.navigate("\(ledger.id)")
         }
     }
 }

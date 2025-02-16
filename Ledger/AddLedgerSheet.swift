@@ -13,6 +13,8 @@ struct AddLedgerSheet: View {
     @State private var ledgerName: String = ""
     @State private var currency: Currency = .cny
     @State private var ledgerMode: LedgerMode = .timeline
+    @State private var tags: [Tag] = []
+
     var body: some View {
         VStack(spacing: 10) {
             HStack {
@@ -39,6 +41,10 @@ struct AddLedgerSheet: View {
                 LedgerModeSelector(selected: $ledgerMode)
             }
             .zIndex(99)
+            HStack {
+                Text("Tag")
+                TagSelector(selected: $tags)
+            }
             Spacer()
         }
         .frame(maxWidth: .infinity)
