@@ -10,23 +10,14 @@ import SwiftData
 
 @main
 struct LedgerApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    let ledgerContainer = DataController.shared.ledgerContainer
+    let logContainer = DataController.shared.logContainer
 
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(sharedModelContainer)
+        .modelContainer(ledgerContainer)
+        .modelContainer(logContainer)
     }
 }
