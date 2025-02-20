@@ -12,6 +12,7 @@ import SwiftData
 struct LedgerApp: App {
     let ledgerContainer = DataController.shared.ledgerContainer
     let logContainer = DataController.shared.logContainer
+    let tagContainer = DataController.shared.tagContainer
 
     var body: some Scene {
         WindowGroup {
@@ -19,5 +20,6 @@ struct LedgerApp: App {
         }
         .modelContainer(ledgerContainer)
         .modelContainer(logContainer)
+        .modelContainer(tagContainer)
     }
 }

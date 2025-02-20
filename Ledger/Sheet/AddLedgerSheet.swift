@@ -7,9 +7,12 @@
 
 import SwiftUI
 import SwiftUIRouter
+import PopupView
 
 struct AddLedgerSheet: View {
     @Binding var isPresented: Bool
+    @State private var showAddTag: Bool = false
+
     @State private var ledgerName: String = ""
     @State private var currency: Currency = .cny
     @State private var ledgerMode: LedgerMode = .timeline
@@ -43,7 +46,22 @@ struct AddLedgerSheet: View {
             .zIndex(99)
             HStack {
                 Text("Tag")
-                TagSelector(selected: $tags)
+//                TagSelector(selected: $tags)
+                Button(
+                    action: {
+                        withAnimation {
+                            showAddTag.toggle()
+                        }
+                    },
+                    label: {
+                        HStack(spacing: nil) {
+                            Spacer()
+                            Image(systemName: "chevron.right")
+//                                .foregroundStyle(bgColor == .white ? .black : .white)
+//                                .rotationEffect(.degrees((showDropdown ? 90 : 0)))
+                        }
+                    }
+                )
             }
             Spacer()
         }
@@ -53,6 +71,18 @@ struct AddLedgerSheet: View {
         .background {
             RoundedRectangle(cornerRadius: 20)
                 .foregroundStyle(Color(uiColor: .systemBackground))
+        }
+        .popup(isPresented: $showAddTag) {
+            ChooseTagSheet(isPresented: $showAddTag)
+        } customize: {
+            $0
+                .type(.default)
+                .position(.bottom)
+                .animation(.spring())
+                .displayMode(.sheet)
+                .backgroundColor(.black.opacity(0.5))
+//                .closeOnTapOutside(false)
+//                .closeOnTap(false)
         }
     }
 }

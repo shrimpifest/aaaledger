@@ -56,4 +56,6 @@ struct RootRoutes: View {
 #Preview {
     ContentView()
         .environmentObject(Navigator())
+        .modelContainer(DataController.shared.ledgerContainer)
+        .modelContainer(DataController.shared.logContainer)
 }

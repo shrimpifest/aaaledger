@@ -2,6 +2,7 @@
 //
 
 import PopupView
+import SwiftData
 import SwiftUI
 import SwiftUIRouter
 
@@ -11,6 +12,7 @@ struct LedgerTabRoutes: View {
             Route(":id") { info in
                 LedgerDetailView(ledgerId: info.parameters["id"]!)
             }
+            //            Route("tag/add", content: AddTagSheet())
             Route(content: LedgerTabView())
         }
     }
@@ -18,8 +20,8 @@ struct LedgerTabRoutes: View {
 
 struct LedgerTabView: View {
     @EnvironmentObject private var navigator: Navigator
+    @Query private var ledgerList: [Ledger]
     @State private var showAddLedger: Bool = false
-    @State private var ledgerList: [Ledger] = []
 
     var body: some View {
         VStack {
@@ -63,9 +65,6 @@ struct LedgerTabView: View {
                 .closeOnTapOutside(false)
                 .closeOnTap(false)
         }
-        .onAppear {
-            self.ledgerList = Ledger.sampleLedgers
-        }
     }
 
     @ViewBuilder
@@ -90,4 +89,6 @@ struct LedgerTabView: View {
 #Preview {
     ContentView()
         .environmentObject(Navigator())
+        .modelContainer(DataController.shared.ledgerContainer)
+        .modelContainer(DataController.shared.logContainer)
 }
